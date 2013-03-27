@@ -17,6 +17,7 @@ development:
   encoding: unicode
   database: coffeetalk_development
   pool: 5
+  host: localhost
   username: coffeetalk
   password: fsc123
 
@@ -43,6 +44,7 @@ test:
   encoding: unicode
   database: coffeetalk_test
   pool: 5
+  host: localhost
   username: coffeetalk
   password: fsc123
 
