@@ -1,2 +1,40 @@
-<p><%= @user.name %></p>
-<p><%= @user.email %></p>
+<div class="row">
+  <div class="span3">
+    <div class="accordion" id="organization-accordion">
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#OrderUp-collapse">
+            OrderUp
+          </a>
+        </div>
+        <div id="OrderUp-collapse" class="accordion-body collapse in">
+          <div class="accordion-inner">
+            <div class="well nav-list-well">
+              <ul class="nav nav-list">
+                <li><a href="">Dev</a></li>
+                <li><a href="">Design</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#TeamPassword-collapse">
+            TeamPassword
+          </a>
+        </div>
+        <div id="TeamPassword-collapse" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <div class="well nav-list-well">
+              <ul class="nav nav-list">
+                <li><a href="">Dev</a></li>
+                <li><a href="">Design</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
