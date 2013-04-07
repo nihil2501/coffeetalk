@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-    puts 'routed'
+    redirect_to posts_path
   end
 end

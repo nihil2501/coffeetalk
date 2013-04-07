@@ -3,9 +3,9 @@
     <div id="reading-list-nav-pill">
       <ul class="nav nav-pills nav-stacked">
         <% if @selected_organization %>
-          <li><%= link_to "Reading List", user_path(@user) %></li>
+          <li><%= link_to "Reading List", posts_path %></li>
         <% else %>
-          <li class="active"><%= link_to "Reading List", user_path(@user) %></li>
+          <li class="active"><%= link_to "Reading List", posts_path %></li>
         <% end %>
       </ul>
     </div>
@@ -30,7 +30,7 @@
                 <% else %>
                   <li>
                 <% end %>
-                <%= link_to "All", user_organization_path(@user.id, organization.id) %></li>
+                <%= link_to "All", posts_path(organization_id: organization.id) %></li>
 
                 <% organization.groups.each do |group| %>
                   <% if @selected_group == group %>
@@ -39,9 +39,9 @@
                     <li>
                   <% end %>
                   <% if @user.groups.include? group %>
-                    <a href="<%= user_group_path(@user.id, group.id) %>"><%= group.name %><i class="icon-ok-sign pull-right"></i></a></li>
+                    <a href="<%= posts_path(group_id: group.id) %>"><%= group.name %><i class="icon-ok-sign pull-right"></i></a></li>
                   <% else %>
-                    <a href="<%= user_group_path(@user.id, group.id) %>"><%= group.name %></a></li>
+                    <a href="<%= posts_path(group_id: group.id) %>"><%= group.name %></a></li>
                   <% end %>
                 <% end %>
               </ul>

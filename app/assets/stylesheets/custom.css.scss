@@ -89,3 +89,20 @@ p {
 #content-section form {
   margin-top: 10px;
 }
+
+.signing-form, .signing-form h2 {
+  text-align: left;
+}
+
+.signing-form input[type='text'], .signing-form input[type='password'] {
+  width: 75%;
+}
+
+.signing-form input[type='submit'] {
+  display: block;
+}
+
+.other-links a {
+  margin-right: 10px;
+  font-size: 14px;
+}

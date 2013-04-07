@@ -1,9 +1,10 @@
 Coffeetalk::Application.routes.draw do
   root to: 'static_pages#home'
 
-  match 'users/:user_id', to: 'users#show', as: :user
-  match 'users/:user_id/organizations/:organization_id', to: 'users#show', as: :user_organization
-  match 'users/:user_id/groups/:group_id', to: 'users#show', as: :user_group
+  resources :posts, only: [:index]
+
+  resource :session, controller: 'sessions'
+  resource :passwords, controller: 'passwords'
 
   resources :organization_memberships, only: [:create, :destroy]
   resources :group_subscriptions, only: [:create, :destroy]

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :name
+  include Clearance::User
+
+  attr_accessible :email, :name, :password
 
   has_many :organization_memberships, :dependent => :destroy
   has_many :organizations, :through => :organization_memberships

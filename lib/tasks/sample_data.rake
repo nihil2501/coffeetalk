@@ -6,10 +6,10 @@ namespace :db do
 end
 
 def make_main_user
-  user = User.create!(name: "Example User", email: "user@example.com")
+  user = User.create!(name: "Example User", email: "user@example.com", password: "password")
 
   3.times do |n|
-    organization = Organization.create!(name: "Example Organization #{n}")
+    organization = Organization.create!(name: "Example Organization #{n+1}")
 
     membership = user.organization_memberships.build
     membership.organization = organization

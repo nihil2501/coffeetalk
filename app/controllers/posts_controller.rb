@@ -1,6 +1,8 @@
-class UsersController < ApplicationController
-  def show
-    @user = User.includes([:groups, {:organizations => :groups}]).find(params[:user_id])
+class PostsController < ApplicationController
+  before_filter :authorize
+
+  def index
+    @user = User.includes([:groups, {:organizations => :groups}]).find(current_user.id)
 
     @selected_group = Group.find(params[:group_id]) if params[:group_id]
 
