@@ -4,13 +4,13 @@ describe "User pages" do
   subject { page }
 
   describe "show" do
-    before(:all) { @user = FactoryGirl.create(:user_with_organizations) }
+    let(:user) {  FactoryGirl.create(:user_with_organizations) }
 
     describe "sidebar" do
-      before { visit user_path(@user.id) }
+      before { visit user_path(user.id) }
 
       it "should show groups for user's organizations" do
-        @user.organizations.each do |organization|
+        user.organizations.each do |organization|
           page.should have_content(organization.name)
 
           organization.groups.each do |group|
@@ -21,11 +21,11 @@ describe "User pages" do
     end
 
     describe "group subscriptions" do
-      before(:all)  { @group_id = @user.organizations.first.groups.first.id }
+      let(:group_id)  { user.organizations.first.groups.first.id }
 
       describe "subscribe" do
         before do
-          visit user_group_path(@user.id, @group_id)
+          visit user_group_path(user.id, group_id)
           click_button "Subscribe"
         end
 
@@ -34,8 +34,8 @@ describe "User pages" do
 
       describe "unsubscribe" do
         before do
-          @user.subscribe!(Group.find(@group_id))
-          visit user_group_path(@user.id, @group_id)
+          user.subscribe!(Group.find(group_id))
+          visit user_group_path(user.id, group_id)
           click_button "Unsubscribe"
         end
 
