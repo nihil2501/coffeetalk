@@ -1,8 +1,12 @@
 Coffeetalk::Application.routes.draw do
   root to: 'static_pages#home'
 
-  resources :users
+  match 'users/:user_id', to: 'users#show', as: :user
+  match 'users/:user_id/organizations/:organization_id', to: 'users#show', as: :user_organization
+  match 'users/:user_id/groups/:group_id', to: 'users#show', as: :user_group
 
+  resources :organization_memberships, only: [:create, :destroy]
+  resources :group_subscriptions, only: [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

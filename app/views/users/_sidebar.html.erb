@@ -1,0 +1,54 @@
+<div class="span3">
+  <div class="accordion" id="organization-accordion">
+    <div id="reading-list-nav-pill">
+      <ul class="nav nav-pills nav-stacked">
+        <% if @selected_organization %>
+          <li><%= link_to "Reading List", user_path(@user) %></li>
+        <% else %>
+          <li class="active"><%= link_to "Reading List", user_path(@user) %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <% @user.organizations.each do |organization| %>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#<%= organization.id %>-collapse">
+            <%= organization.name %>
+          </a>
+        </div>
+        <% if @selected_organization == organization %>
+          <div id="<%= organization.id %>-collapse" class="accordion-body collapse in">
+        <% else %>
+          <div id="<%= organization.id %>-collapse" class="accordion-body collapse">
+        <% end %>
+          <div class="accordion-inner">
+            <div class="well nav-list-well">
+              <ul class="nav nav-list">
+                <% if @selected_organization == organization and @selected_group.nil? %>
+                  <li class="active">
+                <% else %>
+                  <li>
+                <% end %>
+                <%= link_to "All", user_organization_path(@user.id, organization.id) %></li>
+
+                <% organization.groups.each do |group| %>
+                  <% if @selected_group == group %>
+                    <li class="active">
+                  <% else %>
+                    <li>
+                  <% end %>
+                  <% if @user.groups.include? group %>
+                    <a href="<%= user_group_path(@user.id, group.id) %>"><%= group.name %><i class="icon-ok-sign pull-right"></i></a></li>
+                  <% else %>
+                    <a href="<%= user_group_path(@user.id, group.id) %>"><%= group.name %></a></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,31 +1,4 @@
-<%= @user.name %>
-
 <div class="row">
-  <div class="span3">
-    <div class="accordion" id="organization-accordion">
-
-      <% @user.organizations.each do |organization| %>
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#<%= organization.id %>-collapse">
-              <%= organization.name %>
-            </a>
-          </div>
-          <div id="<%= organization.id %>-collapse" class="accordion-body collapse in">
-            <div class="accordion-inner">
-              <div class="well nav-list-well">
-                <ul class="nav nav-list">
-
-                  <li class="active"><a href="">All</a></li>
-                  <% organization.groups.each do |group| %>
-                    <li><a href=""><%= group.name %></a></li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'sidebar' %>
+  <%= render 'posts' %>
 </div>

@@ -1,0 +1,5 @@
+<% if @user.groups.include? @selected_group %>
+  <%= render 'unsubscribe' %>
+<% else %>
+  <%= render 'subscribe' %>
+<% end %>
