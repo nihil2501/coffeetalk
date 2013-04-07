@@ -2,4 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  flashes:
+    success_after_password_create:
+      'You will receive an email within the next few minutes.
+       It contains instructions for changing your password.'
