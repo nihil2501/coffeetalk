@@ -1,3 +1,30 @@
 <div id='clearance' class='sign-in'>
-  <%= render :partial => '/sessions/form' %>
+  <% provide(:title, "Sign in") %>
+
+  <div class="center hero-unit">
+    <h1>Welcome to Coffeetalk</h1>
+
+    <br />
+
+    <div class="row">
+      <div class="span6 offset3 signing-form">
+        <h2>Sign in</h2>
+
+        <%= form_for(:session, url: session_path) do |f| %>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+
+          <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+        <% end %>
+
+        <div class='other-links'>
+          <%= link_to t('.sign_up'), sign_up_path %>
+          <%= link_to t('.forgot_password'), new_password_path %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
