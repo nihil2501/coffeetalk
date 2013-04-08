@@ -5,6 +5,9 @@
 
 $grayMediumLight: #eaeaea;
 
+$alertGreen: rgba(70, 136, 71, .25);
+$alertRed: rgba(185, 74, 72, .25);
+
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -130,8 +133,10 @@ input {
   }
 }
 
-#content-section form {
-  margin-top: 10px;
+#content-section {
+  form {
+    margin-top: 10px;
+  }
 }
 
 .signing-form {
@@ -164,9 +169,13 @@ input {
 }
 
 .alert.alert-error {
-  box-shadow: 1px 1px 3px rgba(185, 74, 72, .25);
+  box-shadow: 1px 1px 3px $alertRed;
 }
 
 .alert.alert-success {
-  box-shadow: 1px 1px 3px rgba(70, 136, 71, .25);
+  box-shadow: 1px 1px 3px $alertGreen;
+}
+
+.nav.nav-list li a {
+  padding-left: 20px;
 }

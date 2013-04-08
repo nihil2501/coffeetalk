@@ -6,6 +6,10 @@ Coffeetalk::Application.routes.draw do
   resources :organization_memberships, only: [:create, :destroy]
   resources :group_subscriptions, only: [:create, :destroy]
 
+  resources :organizations, only: [] do
+    resources :groups, only: [:index, :new, :create, :destroy]
+  end
+
   # clearance overrides
   resources :passwords,
     :controller => 'passwords',
