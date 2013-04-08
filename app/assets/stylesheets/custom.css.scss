@@ -79,6 +79,38 @@ p {
   }
 }
 
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+
+  .alert {
+    width: 66%;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+
 /* miscellaneous */
 
 .nav-list-well {
@@ -129,4 +161,12 @@ p {
   width: 100%;
   margin-top: 45px;
   @include box_sizing;
+}
+
+.alert.alert-error {
+  box-shadow: 1px 1px 3px rgba(185, 74, 72, .25);
+}
+
+.alert.alert-success {
+  box-shadow: 1px 1px 3px rgba(70, 136, 71, .25);
 }
