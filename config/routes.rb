@@ -10,18 +10,6 @@ Coffeetalk::Application.routes.draw do
     resources :groups, only: [:index, :new, :create, :destroy]
   end
 
-  # clearance overrides
-  resources :passwords,
-    :controller => 'passwords',
-    :only => [:create, :new]
-
-  resource :session,
-    :controller => 'sessions',
-    :only => [:create, :new, :destroy]
-
-  get '/sign_in' => 'sessions#new', :as => 'sign_in'
-  delete '/sign_out' => 'sessions#destroy', :as => 'sign_out'
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
