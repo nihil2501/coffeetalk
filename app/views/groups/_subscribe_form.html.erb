@@ -1,5 +1,5 @@
 <%= form_tag(controller: "group_subscriptions", action: "create") do %>
   <%= hidden_field_tag(:user_id, current_user.id) %>
-  <%= hidden_field_tag(:group_id, @selected_group.id) %>
+  <%= hidden_field_tag(:group_id, @group.id) %>
   <%= submit_tag("Subscribe", class: "btn btn-large btn-primary") %>
 <% end %>

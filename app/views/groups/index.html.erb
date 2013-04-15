@@ -1,4 +1,12 @@
+<% @organization.groups.each do |group| %>
+  <div class="row content-row content-row-list">
+    <%= render partial: 'group', object: group %>
+  </div>
+  <hr/>
+<% end %>
+
 <div class="row">
-  <%= render 'shared/sidebar' %>
-  <%= render 'groups' %>
+  <div class="span9">
+    <%= link_to "Create a new group &raquo;".html_safe, new_organization_group_path(@organization) %>
+  </div>
 </div>

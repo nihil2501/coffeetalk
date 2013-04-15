@@ -133,17 +133,30 @@ input {
   }
 }
 
-#content-section {
-  form {
-    margin-top: 10px;
+.content-row {
+  h1, h2, h3, h4, h5, h6 {
+    text-align: left;
+    margin-bottom: 10px;
   }
 }
 
-.signing-form {
+.content-row-list {
+  > div {
+    line-height: 44px;
+  }
+}
+
+.content-row-header {
+  > div {
+    line-height: 62px;
+  }
+}
+
+.full-form {
   text-align: left;
 
   h2 {
-    text-align: left;
+    text-align: center;
   }
 
   input[type='text'], input[type='password'] {
@@ -176,6 +189,6 @@ input {
   box-shadow: 1px 1px 3px $alertGreen;
 }
 
-.nav.nav-list li a {
+.nav.nav-list li.sub-list a {
   padding-left: 20px;
 }

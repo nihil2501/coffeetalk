@@ -1,0 +1,3 @@
+<%= form_for(current_user.group_subscriptions.find_by_group_id(@group), html: { method: :delete }) do |f| %>
+  <%= f.submit "Unsubscribe", class: "btn btn-large" %>
+<% end %>
