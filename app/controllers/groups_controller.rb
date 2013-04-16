@@ -10,19 +10,16 @@ class GroupsController < ApplicationController
     @group = @organization.groups.build(params[:group])
 
     if @group.save
-      redirect_to organization_groups_path(@organization)
+      redirect_to group_posts_path(@group)
     else
       render 'new'
     end
   end
 
   def destroy
-    @organization = Organization.find(params[:organization_id])
+    Group.find(params[:id]).destroy
 
-    group = Group.find(params[:id])
-    group.destroy
-
-    redirect_to organization_groups_path(@organization)
+    redirect_to root_path
   end
 
   def edit
@@ -33,7 +30,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     if @group.update_attributes(params[:group])
-      redirect_to group_path(@group)
+      redirect_to group_posts_path(@group)
     else
       render 'edit'
     end

@@ -4,7 +4,7 @@
       <h1><%= @selected_group.name %></h1>
     </div>
     <div class="pull-right">
-      <%= render 'subscribe_form' %>
+      <%= render 'groups/actions', group: @selected_group %>
     </div>
   <% elsif @selected_organization %>
     <div class="pull-left">

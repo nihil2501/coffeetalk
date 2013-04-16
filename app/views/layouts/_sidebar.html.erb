@@ -2,8 +2,18 @@
 
 <div class="span3">
   <div class="accordion" id="organization-accordion">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <%= link_to "Reading List".html_safe, reading_list_path, class: "accordion-toggle" %>
+      </div>
+    </div>
+
     <% current_user.organizations.each do |organization| %>
-      <div class="accordion-group">
+      <% if @current_organization == organization %>
+        <div class="accordion-group active">
+      <% else %>
+        <div class="accordion-group">
+      <% end %>
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#<%= organization.id %>-collapse">
             <%= organization.name %>
@@ -16,13 +26,13 @@
         <% end %>
           <div class="accordion-inner">
             <div class="well nav-list-well">
+              <li class="nav-header">Reading Groups</li>
               <ul class="nav nav-list">
-                <li class="nav-header">Reading Groups</li>
                 <% organization.groups.each do |group| %>
                   <% if @selected_group == group %>
-                    <li class="sub-list active">
+                    <li class="active">
                   <% else %>
-                    <li class="sub-list">
+                    <li class="">
                   <% end %>
                   <% if current_user.groups.include? group %>
                     <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %><i class="icon-ok-sign pull-right"></i></a></li>
@@ -30,19 +40,21 @@
                     <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %></a></li>
                   <% end %>
                 <% end %>
+                </li>
 
-                <li class="nav-header">Manage</li>
-                <% if @current_organization == organization && @groups %>
-                  <li class="active">
-                <% else %>
-                  <li>
-                <% end %>
-                <%= link_to "Reading groups", organization_groups_path(organization.id) %></li>
+                <li class="">
+                  <%= link_to "Create a new group &raquo;".html_safe, new_organization_group_path(organization) %>
               </ul>
             </div>
           </div>
         </div>
       </div>
     <% end %>
+
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <%= link_to "Create a new organization &raquo;".html_safe, new_organization_path, class: "accordion-toggle" %>
+      </div>
+    </div>
   </div>
 </div>
