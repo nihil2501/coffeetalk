@@ -169,3 +169,11 @@ input {
   color: #ffffff;
   background-color: #0088cc;
 }
+
+li:not(.active) i {
+  opacity: .5;
+}
+
+.accordion-group:not(.active) i {
+  opacity: .5;
+}

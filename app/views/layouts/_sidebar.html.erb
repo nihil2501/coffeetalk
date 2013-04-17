@@ -1,60 +1,83 @@
 <% @current_organization = @selected_organization || @organization %>
 
-<div class="span3">
-  <div class="accordion" id="organization-accordion">
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <%= link_to "Reading List".html_safe, reading_list_path, class: "accordion-toggle" %>
-      </div>
+<div class="accordion" id="organization-accordion">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <%= link_to "Reading List".html_safe, reading_list_path, class: "accordion-toggle" %>
     </div>
+  </div>
 
-    <% current_user.organizations.each do |organization| %>
+  <% current_user.organizations.each do |organization| %>
+    <% if @current_organization == organization %>
+      <div class="accordion-group active">
+    <% else %>
+      <div class="accordion-group">
+    <% end %>
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#<%= organization.id %>-collapse">
+          <%= organization.name %>
+        </a>
+      </div>
       <% if @current_organization == organization %>
-        <div class="accordion-group active">
+        <div id="<%= organization.id %>-collapse" class="accordion-body collapse in">
       <% else %>
-        <div class="accordion-group">
+        <div id="<%= organization.id %>-collapse" class="accordion-body collapse">
       <% end %>
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#<%= organization.id %>-collapse">
-            <%= organization.name %>
-          </a>
-        </div>
-        <% if @current_organization == organization %>
-          <div id="<%= organization.id %>-collapse" class="accordion-body collapse in">
-        <% else %>
-          <div id="<%= organization.id %>-collapse" class="accordion-body collapse">
-        <% end %>
-          <div class="accordion-inner">
-            <div class="well nav-list-well">
-              <li class="nav-header">Reading Groups</li>
-              <ul class="nav nav-list">
-                <% organization.groups.each do |group| %>
-                  <% if @selected_group == group %>
-                    <li class="active">
-                  <% else %>
-                    <li class="">
-                  <% end %>
-                  <% if current_user.groups.include? group %>
-                    <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %><i class="icon-ok-sign pull-right"></i></a></li>
-                  <% else %>
-                    <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %></a></li>
-                  <% end %>
+        <div class="accordion-inner">
+          <div class="well nav-list-well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Reading Groups<i class="icon-list pull-right"></i></li>
+              <% organization.groups.each do |group| %>
+                <% if @selected_group == group %>
+                  <li class="active">
+                <% else %>
+                  <li class="">
                 <% end %>
-                </li>
-
-                <li class="">
-                  <%= link_to "Create a new group &raquo;".html_safe, new_organization_group_path(organization) %>
-              </ul>
-            </div>
+                <% if current_user.groups.include? group %>
+                  <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %><i class="icon-check pull-right"></i></a></li>
+                <% else %>
+                  <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %></a></li>
+                <% end %>
+              <% end %>
+              <li class="divider"></li>
+              <li class="">
+                <a href="<%= new_organization_group_path(organization) %>">Create a new group<i class="icon-pencil pull-right"></i></a>
+              </li>
+              <li>
+                <a class="organization-toggle" href="#">Manage Organization<i class="icon-wrench pull-right"></i></a>
+              </li>
+            </ul>
+            <ul class="nav nav-list manage-organization">
+              <li class="nav-header">Manage Organization<i class="icon-wrench pull-right"></i></li>
+              <li><%= link_to "Leave", organization_membership_path(current_user.organization_memberships.find_by_organization_id(organization).id), method: :delete %></li>
+              <li><%= link_to "Edit", edit_organization_path(organization) %></li>
+              <li><%= link_to "Delete", organization_path(organization), method: :delete, confirm: "Are you sure?" %></li>
+              <li class="divider"></li>
+              <li>
+                <a class="organization-toggle" href="#">Reading Groups<i class="icon-list pull-right"></i></a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    <% end %>
+    </div>
+  <% end %>
 
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <%= link_to "Create a new organization &raquo;".html_safe, new_organization_path, class: "accordion-toggle" %>
-      </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" href="<%= new_organization_path %>">Create a new organization<i class="icon-pencil pull-right"></i></a>
     </div>
   </div>
 </div>
+
+<% content_for :javascript do %>
+<script>
+$(function () {
+  $('.manage-organization').hide();
+
+  $('.organization-toggle').click(function() {
+    $(this).parents('.accordion-inner').find('ul.nav.nav-list').toggle();
+  });
+});
+</script>
+<% end %>

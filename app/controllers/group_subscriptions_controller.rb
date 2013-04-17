@@ -2,16 +2,12 @@ class GroupSubscriptionsController < ApplicationController
   before_filter :authorize
 
   def create
-    group = Group.find(params[:group_id])
-    current_user.subscribe!(group)
-
+    current_user.subscribe!(Group.find(params[:group_id]))
     redirect_to :back
   end
 
   def destroy
-    subscription = GroupSubscription.find(params[:id])
-    subscription.destroy
-
+    GroupSubscription.find(params[:id]).destroy
     redirect_to :back
   end
 end
