@@ -10,6 +10,8 @@ class GroupsController < ApplicationController
     @group = @organization.groups.build(params[:group])
 
     if @group.save
+      current_user.subscribe!(@group)
+
       redirect_to group_posts_path(@group)
     else
       render 'new'

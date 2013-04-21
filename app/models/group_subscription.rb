@@ -1,6 +1,5 @@
 class GroupSubscription < ActiveRecord::Base
-  attr_accessible :group_id
-  attr_accessible :organization_membership_id
+  attr_accessible :group_id, :organization_membership_id
 
   belongs_to :organization_membership
   belongs_to :group
