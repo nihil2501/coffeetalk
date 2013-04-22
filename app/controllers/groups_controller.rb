@@ -1,10 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :authorize
 
-  def index
-    @organization = Organization.includes(:groups).find(params[:organization_id])
-  end
-
   def create
     @organization = Organization.find(params[:organization_id])
     @group = @organization.groups.build(params[:group])
@@ -36,10 +32,6 @@ class GroupsController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def show
-    @group = Group.find(params[:id])
   end
 
   def new
