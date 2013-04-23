@@ -2,4 +2,8 @@
   <%= render 'posts/sidebar/reading_list' %>
 <% end %>
 
+<%= content_for :sidebar_organization do %>
+  <%= render 'posts/sidebar/organization' %>
+<% end %>
+
 <%= render template: 'layouts/application' %>

@@ -1,0 +1,53 @@
+<% if @group.organization == organization %>
+  <div class="accordion-group active">
+<% else %>
+  <div class="accordion-group">
+<% end %>
+  <div class="accordion-heading">
+    <a class="accordion-toggle" data-toggle="collapse" data-parent="#organization-accordion" href="#<%= organization.id %>-collapse">
+      <%= organization.name %>
+    </a>
+  </div>
+  <% if @group.organization == organization %>
+    <div id="<%= organization.id %>-collapse" class="accordion-body collapse in">
+  <% else %>
+    <div id="<%= organization.id %>-collapse" class="accordion-body collapse">
+  <% end %>
+    <div class="accordion-inner">
+      <div class="well nav-list-well">
+        <ul class="nav nav-list">
+          <li class="nav-header">Reading Groups<i class="icon-list pull-right"></i></li>
+          <% organization.groups.each do |group| %>
+            <% if @group == group %>
+              <li class="active">
+            <% else %>
+              <li class="">
+            <% end %>
+            <% if current_user.groups.include? group %>
+              <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %><i class="icon-check pull-right"></i></a></li>
+            <% else %>
+              <a href="<%= group_posts_path(group_id: group.id) %>"><%= group.name %></a></li>
+            <% end %>
+          <% end %>
+          <li class="divider"></li>
+          <li class="">
+            <a href="<%= new_organization_group_path(organization) %>">Create a new group<i class="icon-pencil pull-right"></i></a>
+          </li>
+          <li>
+            <a class="organization-toggle" href="#">Manage Organization<i class="icon-wrench pull-right"></i></a>
+          </li>
+        </ul>
+        <ul class="nav nav-list manage-organization">
+          <li class="nav-header">Manage Organization<i class="icon-wrench pull-right"></i></li>
+          <li><%= link_to "Leave", organization_membership_path(current_user.organization_memberships.find_by_organization_id(organization).id), confirm: "Are you sure?", method: :delete %></li>
+          <li><%= link_to "Edit", edit_organization_path(organization) %></li>
+          <li><%= link_to "Delete", organization_path(organization), method: :delete, confirm: "Are you sure?" %></li>
+          <li class="divider"></li>
+          <li>
+            <a class="organization-toggle" href="#">Reading Groups<i class="icon-list pull-right"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
