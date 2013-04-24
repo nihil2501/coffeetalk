@@ -2,8 +2,10 @@
   <%= render 'posts/sidebar/reading_list' %>
 <% end %>
 
-<%= content_for :sidebar_organization do %>
-  <%= render 'posts/sidebar/organization' %>
+<% current_user.organizations.each do |organization| %>
+  <%= content_for :sidebar_organization do %>
+    <%= render partial: 'posts/sidebar/organization', locals: { organization: organization } %>
+  <% end %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

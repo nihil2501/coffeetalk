@@ -1,3 +1,5 @@
+<%= organization_accordion_group(organization, active: @group.organization == organization) %>
+
 <% if @group.organization == organization %>
   <div class="accordion-group active">
 <% else %>

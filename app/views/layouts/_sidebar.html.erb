@@ -1,16 +1,13 @@
-<div class="accordion" id="organization-accordion">
+<%= accordion(id: "organization-accordion") do %>
   <%= yield :sidebar_reading_list %>
-
-  <% current_user.organizations.each do |organization| %>
-    <%= yield :sidebar_organization %>
-  <% end %>
+  <%= yield :sidebar_organization %>
 
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" href="<%= new_organization_path %>">Create a new organization<i class="icon-pencil pull-right"></i></a>
     </div>
   </div>
-</div>
+<% end %>
 
 <% content_for :javascript do %>
 <script>
