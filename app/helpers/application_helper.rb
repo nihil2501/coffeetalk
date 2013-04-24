@@ -1,59 +1,38 @@
 module ApplicationHelper
-  def organization_accordion_group(organization, options = {})
-    accordion_group(organization.name, '', :"data-parent" => "#organization-accordion", class: options[:active] ? 'active' : '') do
-
+  def li_icon_link_to(text, url, active, icon, options = {})
+    content_tag :li, class: "#{'active' if active}" do
+      link_to url, options do
+        concat text
+        concat(content_tag :i, '', class: "#{icon} pull-right") if icon
+      end
     end
   end
 
-  def accordion_group(text, url, options = {})
-    content_tag :div, class: "accordion-group #{options[:"accordion-group"][:class]}" do
+  def accordion_group_link_to(text, url, active, icon = nil)
+    content_tag :div, class: "accordion-group#{' active' if active}" do
       content_tag :div, class: "accordion-heading" do
-        link_attributes = { class: "accordion-toggle" }
+        link_to url, class: "accordion-toggle" do
+          concat text
+          concat(content_tag :i, '', class: "#{icon} pull-right") if icon
+        end
+      end
+    end
+  end
 
-        extra_attributes = {
-          :"data-toggle" => "collapse",
-          :"data-parent"
-        }
-
-        link_to text, url, class: "accordion-toggle"
+  def accordion_group(text, target, parent, active)
+    content_tag :div, class: "accordion-group#{' active' if active}" do
+      heading = content_tag :div, class: "accordion-heading" do
+        link_to text, target, class: "accordion-toggle", :"data-toggle" => "collapse", :"data-parent" => "##{parent}"
       end
 
-      yield
+      body = content_tag :div, id: target, class: "accordion-body collapse#{' in' if active}" do
+        content_tag :div, class: "accordion-inner" do
+          yield
+        end
+      end
+
+      concat heading
+      concat body
     end
-  end
-
-  def accordion_group_link(text, url, options = {})
-    accordion_group(options) do
-      accordion_heading_link(text, url, options = {})
-    end
-  end
-
-  def accordion(options = {})
-    content_tag :div, class: "accordion", id: "#{options[:id]}" do
-      accordion_group(accordion: options)
-    end
-  end
-
-  def accordion_group(options = {})
-    content_tag :div, class: "accordion-group #{options[:class]}" do
-      accordion_heading(accordion_group: options)
-    end
-  end
-
-  def accordion_heading(options = {})
-    content_tag :div, class: "accordion-heading" do
-      accordion_toggle(accordion_heading: options)
-    end
-  end
-
-  def accordion_toggle(options = {})
-    link_to text, url, {
-      class: "accordion-toggle",
-      :"data-toggle" => "collapse",
-      :"data-parent" => options[:accordion_heading][:accordion_group][:accordion][:id]
-    }
-  end
-
-  def accordion_body
   end
 end
