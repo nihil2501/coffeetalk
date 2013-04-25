@@ -1,5 +1,25 @@
-<% content_for :sidebar_reading_list do %>
-  <%= render 'organizations/sidebar/reading_list' %>
+<% content_for :sidebar do %>
+  <%= render 'shared/sidebar/reading_list' %>
+
+  <% current_user.organizations.each do |organization| %>
+    <% content_for :group_li_links do %>
+      <% organization.groups.each do |group| %>
+        <%= render partial: 'shared/sidebar/organization/active_group', locals: { group: group, active: false } %>
+      <% end %>
+    <% end %>
+
+    <% content_for :new_group_li_link do %>
+      <%= render partial: 'shared/sidebar/organization/active_new_group', locals: { organization: organization, active: false } %>
+    <% end %>
+
+    <% content_for :edit_organization_li_link do %>
+      <%= render partial: 'shared/sidebar/organization/active_edit_organization', locals: { organization: organization, active: organization == @organization } %>
+    <% end %>
+
+    <%= render partial: 'shared/sidebar/organization/active_organization', locals: { organization: organization, active: organization == @organization } %>
+  <% end %>
+
+  <%= accordion_group_link_to "Create a new organization", new_organization_path, !current_user.organizations.include?(@organization), "icon-pencil" %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

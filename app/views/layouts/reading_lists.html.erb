@@ -1,0 +1,11 @@
+<% content_for :sidebar do %>
+  <%= accordion_group_link_to "Reading List", reading_list_path, true %>
+
+  <% current_user.organizations.each do |organization| %>
+    <%= render partial: 'shared/sidebar/organization', locals: { organization: organization } %>
+  <% end %>
+
+  <%= render 'shared/sidebar/new_organization' %>
+<% end %>
+
+<%= render template: 'layouts/application' %>

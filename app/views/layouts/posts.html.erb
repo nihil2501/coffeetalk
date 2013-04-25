@@ -1,15 +1,25 @@
-<% content_for :sidebar_reading_list do %>
-  <%= render 'posts/sidebar/reading_list' %>
-<% end %>
+<% content_for :sidebar do %>
+  <%= render 'shared/sidebar/reading_list' %>
 
-<% current_user.organizations.each do |organization| %>
-  <%= content_for :sidebar_organization do %>
-    <%= render partial: 'posts/sidebar/organization', locals: { organization: organization } %>
+  <% current_user.organizations.each do |organization| %>
+    <% content_for :group_li_links do %>
+      <% organization.groups.each do |group| %>
+        <%= render partial: 'shared/sidebar/organization/active_group', locals: { group: group, active: group == @group } %>
+      <% end %>
+    <% end %>
+
+    <% content_for :new_group_li_link do %>
+      <%= render partial: 'shared/sidebar/organization/active_new_group', locals: { organization: organization, active: false } %>
+    <% end %>
+
+    <% content_for :edit_organization_li_link do %>
+      <%= render partial: 'shared/sidebar/organization/active_edit_organization', locals: { organization: organization, active: false } %>
+    <% end %>
+
+    <%= render partial: 'shared/sidebar/organization/active_organization', locals: { organization: organization, active: organization == @group.organization } %>
   <% end %>
-<% end %>
 
-<% content_for :sidebar_new_organization do %>
-  <%= render 'posts/sidebar/new_organization' %>
+  <%= render 'shared/sidebar/new_organization' %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

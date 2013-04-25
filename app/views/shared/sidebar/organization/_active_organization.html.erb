@@ -1,15 +1,12 @@
-<%= accordion_group(organization.name, "#{organization.id}-collapse", "organization-accordion", @group.organization == organization) do %>
+<%= accordion_group(organization.name, "#{organization.id}-collapse", "organization-accordion", active) do %>
   <div class="well nav-list-well">
     <ul class="nav nav-list">
       <li class="nav-header">Reading Groups<i class="icon-list pull-right"></i></li>
-
-      <% organization.groups.each do |group| %>
-        <%= li_icon_link_to(group.name, group_posts_path(group_id: group.id), group == @group, current_user.groups.include?(group) && "icon-check") %>
-      <% end %>
+      <%= yield :group_li_links %>
+      <%= yield :new_group_li_link %>
 
       <li class="divider"></li>
 
-      <%= li_icon_link_to "Create a new group", new_organization_group_path(organization), false, "icon-pencil" %>
       <%= li_icon_link_to "Manage Organization", "#", false, "icon-wrench", class: "organization-toggle" %>
     </ul>
 
@@ -17,7 +14,7 @@
       <li class="nav-header">Manage Organization<i class="icon-wrench pull-right"></i></li>
 
       <li><%= link_to "Leave", organization_membership_path(current_user.organization_memberships.find_by_organization_id(organization).id), confirm: "Are you sure?", method: :delete %></li>
-      <li><%= link_to "Edit", edit_organization_path(organization) %></li>
+      <%= yield :edit_organization_li_link %>
       <li><%= link_to "Delete", organization_path(organization), method: :delete, confirm: "Are you sure?" %></li>
 
       <li class="divider"></li>

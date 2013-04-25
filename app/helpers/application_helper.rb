@@ -22,7 +22,7 @@ module ApplicationHelper
   def accordion_group(text, target, parent, active)
     content_tag :div, class: "accordion-group#{' active' if active}" do
       heading = content_tag :div, class: "accordion-heading" do
-        link_to text, target, class: "accordion-toggle", :"data-toggle" => "collapse", :"data-parent" => "##{parent}"
+        link_to text, "##{target}", class: "accordion-toggle", :"data-toggle" => "collapse", :"data-parent" => "##{parent}"
       end
 
       body = content_tag :div, id: target, class: "accordion-body collapse#{' in' if active}" do
