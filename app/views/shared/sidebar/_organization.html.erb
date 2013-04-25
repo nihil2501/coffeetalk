@@ -1,15 +1,25 @@
-<% content_for :group_li_links do %>
-  <% organization.groups.each do |group| %>
-    <%= render partial: 'shared/sidebar/organization/active_group', locals: { group: group, active: false } %>
-  <% end %>
-<% end %>
+<%= accordion_group(organization.name, "#{organization.id}-collapse", "organization-accordion", active) do %>
+  <div class="well nav-list-well">
+    <ul class="nav nav-list">
+      <li class="nav-header">Reading Groups<i class="icon-list pull-right"></i></li>
+      <%= group_li_links(organization) %>
+      <%= new_group_li_link(organization) %>
 
-<% content_for :new_group_li_link do %>
-  <%= render partial: 'shared/sidebar/organization/active_new_group', locals: { organization: organization, active: false } %>
-<% end %>
+      <li class="divider"></li>
 
-<% content_for :edit_organization_li_link do %>
-  <%= render partial: 'shared/sidebar/organization/active_edit_organization', locals: { organization: organization, active: false } %>
-<% end %>
+      <%= li_icon_link_to "Manage Organization", "#", false, "icon-wrench", class: "organization-toggle" %>
+    </ul>
 
-<%= render partial: 'shared/sidebar/organization/active_organization', locals: { organization: organization, active: false } %>
+    <ul class="nav nav-list manage-organization">
+      <li class="nav-header">Manage Organization<i class="icon-wrench pull-right"></i></li>
+
+      <li><%= link_to "Leave", organization_membership_path(current_user.organization_memberships.find_by_organization_id(organization).id), confirm: "Are you sure?", method: :delete %></li>
+      <%= edit_organization_li_link(organization) %>
+      <li><%= link_to "Delete", organization_path(organization), method: :delete, confirm: "Are you sure?" %></li>
+
+      <li class="divider"></li>
+
+      <%= li_icon_link_to "Reading Groups", "#", false, "icon-list", class: "organization-toggle" %>
+    </ul>
+  </div>
+<% end %>
