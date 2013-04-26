@@ -2,7 +2,7 @@
   <div class="well nav-list-well">
     <ul class="nav nav-list">
       <li class="nav-header">Reading Groups<i class="icon-list pull-right"></i></li>
-      <%= group_li_links(organization) %>
+      <%= render partial: 'shared/sidebar/group', collection: organization.groups %>
       <%= new_group_li_link(organization) %>
 
       <li class="divider"></li>

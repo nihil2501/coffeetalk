@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= render 'shared/sidebar/reading_list' %>
+  <%= render partial: 'shared/sidebar/reading_list', locals: { active: false } %>
 
   <% current_user.organizations.each do |organization| %>
     <% content_for :edit_organization_li_link do %>
@@ -9,7 +9,7 @@
     <%= render partial: 'shared/sidebar/organization', locals: { organization: organization, active: organization == @organization } %>
   <% end %>
 
-  <%= accordion_group_link_to "Create a new organization", new_organization_path, !current_user.organizations.include?(@organization), "icon-pencil" %>
+  <%= render partial: 'shared/sidebar/new_organization', locals: { active: !current_user.organizations.include?(@organization) } %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

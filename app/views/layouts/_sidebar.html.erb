@@ -3,14 +3,14 @@
 </div>
 
 <% content_for :javascript do %>
-<script>
-$(function () {
   $('.manage-organization').hide();
 
   $('.organization-toggle').click(function() {
     $(this).parents('.accordion-inner').find('ul.nav.nav-list').toggle();
     return false;
   });
-});
-</script>
+
+  var afterSidebar = afterSidebar || [];
+
+  $.each(afterSidebar, function(idx, el) { el(); });
 <% end %>
