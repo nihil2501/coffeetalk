@@ -1,15 +1,4 @@
 module SidebarHelper
-  def sidebar_reading_list
-    provided = yield_content!(:sidebar_reading_list)
-    default  = link_to_reading_list(false)
-
-    provided.blank? ? default : provided
-  end
-
-  def link_to_reading_list(active)
-    accordion_group_link_to("Reading List", reading_list_path, active)
-  end
-
   def sidebar_new_organization
     provided = yield_content!(:sidebar_new_organization)
     default  = link_to_new_organization(false)
@@ -24,6 +13,10 @@ module SidebarHelper
       active,
       "icon-pencil"
     )
+  end
+
+  def link_to_reading_list
+    accordion_group_link_to("Reading List", reading_list_path, @organization.nil?)
   end
 
   def content_for_sidebar_organizations(organization)
@@ -45,7 +38,7 @@ module SidebarHelper
   def sidebar_organization(organization)
     render(
       partial: 'shared/sidebar/organization',
-      locals: { organization: organization, active: organization == @organization }
+      locals: { organization: organization }
     )
   end
 
@@ -82,10 +75,13 @@ module SidebarHelper
     )
   end
 
-  def organization_accordion_group(organization, active)
-    accordion_group(organization.name, "#{organization.id}-collapse", "organization-accordion", active) do
-      yield
-    end
+  def organization_accordion_group(organization)
+    accordion_group(
+      organization.name,
+      "#{organization.id}-collapse",
+      "organization-accordion",
+      organization == @organization
+    ) { yield }
   end
 
   def group_links(groups)

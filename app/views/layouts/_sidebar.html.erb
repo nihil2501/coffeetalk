@@ -1,5 +1,5 @@
 <div class="accordion" id="organization-accordion">
-  <%= sidebar_reading_list %>
+  <%= link_to_reading_list %>
   <%= sidebar_organizations %>
   <%= sidebar_new_organization %>
 </div>
@@ -13,7 +13,7 @@
     $firstNavList = $($navLists[0]);
     $firstNavList.detach();
     $firstNavList.appendTo($navWell);
-    $navLists.slideToggle();
+    $navLists.slideToggle(200);
     return false;
   });
 
