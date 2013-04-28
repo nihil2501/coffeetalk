@@ -1,0 +1,13 @@
+<% current_user.organizations.each do |organization| %>
+  <% content_for_sidebar_organizations(organization) do %>
+    <% content_for :sidebar_edit_organization do %>
+      <%= link_to_edit_organization(organization, organization == @organization) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :sidebar_new_organization do %>
+  <%= link_to_new_organization(!current_user.organizations.include?(@organization)) %>
+<% end %>
+
+<%= render template: 'layouts/application' %>

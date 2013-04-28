@@ -5,6 +5,9 @@
 
 $grayMediumLight: #eaeaea;
 
+$alertGreen: rgba(70, 136, 71, .25);
+$alertRed: rgba(185, 74, 72, .25);
+
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -79,34 +82,55 @@ p {
   }
 }
 
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+
+  .alert {
+    width: 66%;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+
 /* miscellaneous */
+
+#group-header #group-actions {
+  line-height: 42px;
+  margin: 10px 0px 30px 0px;
+}
 
 .nav-list-well {
   padding: 8px 0;
   margin: 0;
 }
 
-#reading-list-nav-pill {
-  a {
-    font-size: 20px;
-    line-height: 20px;
-    font-weight: bold;
-  }
-
-  ul {
-    margin-bottom: 2px;
-  }
-}
-
-#content-section form {
-  margin-top: 10px;
-}
-
-.signing-form {
+.full-form {
   text-align: left;
 
   h2 {
-    text-align: left;
+    text-align: center;
   }
 
   input[type='text'], input[type='password'] {
@@ -129,4 +153,27 @@ p {
   width: 100%;
   margin-top: 45px;
   @include box_sizing;
+}
+
+.alert.alert-error {
+  box-shadow: 1px 1px 3px $alertRed;
+}
+
+.alert.alert-success {
+  box-shadow: 1px 1px 3px $alertGreen;
+}
+
+.accordion-group.active > .accordion-heading > a,
+.accordion-group.active > .accordion-heading > a:hover,
+.accordion-group.active > .accordion-heading > a:focus {
+  color: #ffffff;
+  background-color: #0088cc;
+}
+
+li:not(.active) i {
+  opacity: .5;
+}
+
+.accordion-group:not(.active) i {
+  opacity: .5;
 }

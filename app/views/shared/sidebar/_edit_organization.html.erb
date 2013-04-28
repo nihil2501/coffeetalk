@@ -1,0 +1,13 @@
+$collapse = $('#<%= organization.id %>-collapse');
+$navWell = $collapse.find('.nav-list-well');
+$navLists = $navWell.find('ul.nav.nav-list');
+$firstNavList = $($navLists[0]);
+$firstNavList.detach();
+$firstNavList.appendTo($navWell);
+
+var afterSidebar = [];
+
+afterSidebar.push(function () {
+  $collapse.find('ul.nav.nav-list').hide();
+  $collapse.find('.manage-organization').show();
+});

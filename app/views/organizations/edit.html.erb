@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="offset1 span4 well full-form">
+    <h2>Edit organization</h2>
+
+    <%= form_for @organization, url: organization_path, html: { method: :put } do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

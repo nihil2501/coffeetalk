@@ -1,0 +1,23 @@
+<div class="accordion" id="organization-accordion">
+  <%= sidebar_reading_list %>
+  <%= sidebar_organizations %>
+  <%= sidebar_new_organization %>
+</div>
+
+<% content_for :javascript do %>
+  $('.manage-organization').hide();
+
+  $('.organization-toggle').click(function() {
+    $navWell = $(this).parents('.nav-list-well');
+    $navLists = $navWell.find('ul.nav.nav-list');
+    $firstNavList = $($navLists[0]);
+    $firstNavList.detach();
+    $firstNavList.appendTo($navWell);
+    $navLists.slideToggle();
+    return false;
+  });
+
+  var afterSidebar = afterSidebar || [];
+
+  $.each(afterSidebar, function(idx, el) { el(); });
+<% end %>
