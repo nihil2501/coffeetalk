@@ -1,7 +1,5 @@
-<% content_for :sidebar_organizations do %>
-  <% current_user.organizations.each do |organization| %>
-    <%= render partial: 'shared/sidebar/organization', locals: { organization: organization, active: organization == @group.organization } %>
-  <% end %>
+<% current_user.organizations.each do |organization| %>
+  <% content_for_sidebar_organizations(organization) do; end %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

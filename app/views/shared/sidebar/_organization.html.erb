@@ -1,26 +1,26 @@
 <%= organization_accordion_group(organization, active) do %>
   <div class="well nav-list-well">
+    <ul class="nav nav-list manage-organization">
+      <%= li_icon_nav_header "Manage Organization", "icon-wrench" %>
+
+      <%= link_to_leave_organization(organization) %>
+      <%= sidebar_edit_organization(organization) %>
+      <%= link_to_delete_organization(organization) %>
+
+      <li class="divider"></li>
+
+      <%= manage_organization_toggle "Reading Groups", "icon-list" %>
+    </ul>
+
     <ul class="nav nav-list">
       <%= li_icon_nav_header "Reading Groups", "icon-list" %>
 
-      <%= group_li_links(organization.groups) %>
+      <%= group_links(organization.groups) %>
       <%= sidebar_new_group(organization) %>
 
       <li class="divider"></li>
 
-      <%= li_organization_toggle "Manage Organization", "icon-wrench" %>
-    </ul>
-
-    <ul class="nav nav-list manage-organization">
-      <%= li_icon_nav_header "Manage Organization", "icon-wrench" %>
-
-      <%= li_link_to_leave_organization(organization) %>
-      <%= sidebar_edit_organization(organization) %>
-      <%= li_link_to_delete_organization(organization) %>
-
-      <li class="divider"></li>
-
-      <%= li_organization_toggle "Reading Groups", "icon-list" %>
+      <%= manage_organization_toggle "Manage Organization", "icon-wrench" %>
     </ul>
   </div>
 <% end %>

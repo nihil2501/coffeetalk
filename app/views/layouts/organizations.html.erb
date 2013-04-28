@@ -1,15 +1,13 @@
-<% content_for :sidebar_organizations do %>
-  <% current_user.organizations.each do |organization| %>
+<% current_user.organizations.each do |organization| %>
+  <% content_for_sidebar_organizations(organization) do %>
     <% content_for :sidebar_edit_organization do %>
-      <%= li_link_to_edit_organization(organization, organization == @organization) %>
+      <%= link_to_edit_organization(organization, organization == @organization) %>
     <% end %>
-
-    <%= render partial: 'shared/sidebar/organization', locals: { organization: organization, active: organization == @organization } %>
   <% end %>
 <% end %>
 
 <% content_for :sidebar_new_organization do %>
-  <%= li_link_to_new_organization(!current_user.organizations.include?(@organization)) %>
+  <%= link_to_new_organization(!current_user.organizations.include?(@organization)) %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

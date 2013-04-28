@@ -46,4 +46,8 @@ module ApplicationHelper
   def glyphicon(icon)
     content_tag(:i, '', class: "#{icon} pull-right")
   end
+
+  def yield_content!(content_key)
+    view_flow.content.delete(content_key)
+  end
 end

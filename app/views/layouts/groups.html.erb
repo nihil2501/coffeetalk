@@ -1,10 +1,8 @@
-<% content_for :sidebar_organizations do %>
-  <% current_user.organizations.each do |organization| %>
+<% current_user.organizations.each do |organization| %>
+  <% content_for_sidebar_organizations(organization) do %>
     <% content_for :sidebar_new_group do %>
-      <% li_link_to_new_group(organization, organization == @organization && !organization.groups.include?(@group)) %>
+      <% link_to_new_group(organization, organization == @organization && !organization.groups.include?(@group)) %>
     <% end %>
-
-    <%= render partial: 'shared/sidebar/organization', locals: { organization: organization, active: organization == @group.organization } %>
   <% end %>
 <% end %>
 
