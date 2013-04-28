@@ -1,11 +1,7 @@
-<% content_for :sidebar do %>
-  <%= render partial: 'shared/sidebar/reading_list', locals: { active: false } %>
-
+<% content_for :sidebar_organizations do %>
   <% current_user.organizations.each do |organization| %>
     <%= render partial: 'shared/sidebar/organization', locals: { organization: organization, active: organization == @group.organization } %>
   <% end %>
-
-  <%= render partial: 'shared/sidebar/new_organization', locals: { active: false } %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

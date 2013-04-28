@@ -1,11 +1,5 @@
-<% content_for :sidebar do %>
-  <%= render partial: 'shared/sidebar/reading_list', locals: { active: true } %>
-
-  <% current_user.organizations.each do |organization| %>
-    <%= render partial: 'shared/sidebar/organization', locals: { organization: organization, active: false } %>
-  <% end %>
-
-  <%= render partial: 'shared/sidebar/new_organization', locals: { active: false } %>
+<% content_for :sidebar_reading_list do %>
+  <%= li_link_to_reading_list(true) %>
 <% end %>
 
 <%= render template: 'layouts/application' %>

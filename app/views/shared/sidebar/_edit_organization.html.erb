@@ -1,14 +1,8 @@
-<%= li_icon_link_to "Edit", edit_organization_path(organization), active, nil %>
+var afterSidebar = [];
 
-<% if active %>
-  <% content_for :javascript do %>
-    var afterSidebar = [];
+afterSidebar.push(function () {
+  $collapse = $('#<%= organization.id %>-collapse');
 
-    afterSidebar.push(function () {
-      $collapse = $('#<%= organization.id %>-collapse');
-
-      $collapse.find('ul.nav.nav-list').hide();
-      $collapse.find('.manage-organization').show();
-    });
-  <% end %>
-<% end %>
+  $collapse.find('ul.nav.nav-list').hide();
+  $collapse.find('.manage-organization').show();
+});

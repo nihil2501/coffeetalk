@@ -2,8 +2,8 @@ module ApplicationHelper
   def li_icon_link_to(text, url, active, icon, options = {})
     content_tag :li, class: "#{'active' if active}" do
       link_to url, options do
-        concat text
-        concat(content_tag :i, '', class: "#{icon} pull-right") if icon
+        concat(text)
+        concat(glyphicon(icon)) if icon
       end
     end
   end
@@ -12,8 +12,8 @@ module ApplicationHelper
     content_tag :div, class: "accordion-group#{' active' if active}" do
       content_tag :div, class: "accordion-heading" do
         link_to url, class: "accordion-toggle" do
-          concat text
-          concat(content_tag :i, '', class: "#{icon} pull-right") if icon
+          concat(text)
+          concat(glyphicon(icon)) if icon
         end
       end
     end
@@ -31,8 +31,19 @@ module ApplicationHelper
         end
       end
 
-      concat heading
-      concat body
+      concat(heading)
+      concat(body)
     end
+  end
+
+  def li_icon_nav_header(text, icon = nil)
+    content_tag :li, class: "nav-header" do
+      concat(text)
+      concat(glyphicon(icon)) if icon
+    end
+  end
+
+  def glyphicon(icon)
+    content_tag(:i, '', class: "#{icon} pull-right")
   end
 end
