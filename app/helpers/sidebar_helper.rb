@@ -11,12 +11,15 @@ module SidebarHelper
       "Create a new organization",
       new_organization_path,
       active,
-      "icon-pencil"
+      active ? "icon-pencil icon-white" : "icon-pencil"
     )
   end
 
   def link_to_reading_list
-    accordion_group_link_to("Reading List", reading_list_path, @organization.nil?)
+    active = @organization.nil?
+    icon   = active ? "icon-list icon-white" : "icon-list"
+
+    accordion_group_link_to("Reading List", reading_list_path, active, icon)
   end
 
   def content_for_sidebar_organizations(organization)

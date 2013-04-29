@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
   include Clearance::Controller
-  protect_from_forgery
-
   include SidebarHelper
+
+  protect_from_forgery
+  before_filter :authorize
 
   # http://stackoverflow.com/questions/6902531/how-to-eager-load-associations-with-the-current-user
   def current_user

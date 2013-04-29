@@ -1,6 +1,4 @@
 class GroupSubscriptionsController < ApplicationController
-  before_filter :authorize
-
   def create
     current_user.subscribe!(Group.find(params[:group_id]))
     redirect_to :back

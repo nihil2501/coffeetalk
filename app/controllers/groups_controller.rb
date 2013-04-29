@@ -1,6 +1,4 @@
 class GroupsController < ApplicationController
-  before_filter :authorize
-
   def create
     @organization = Organization.find(params[:organization_id])
     @group = @organization.groups.build(params[:group])
