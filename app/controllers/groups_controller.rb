@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
     if @group.save
       current_user.subscribe!(@group)
 
-      redirect_to group_posts_path(@group)
+      redirect_to group_posts_url(@group)
     else
       render 'new'
     end
@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
   def destroy
     Group.find(params[:id]).destroy
 
-    redirect_to root_path
+    redirect_to root_url
   end
 
   def edit
@@ -27,7 +27,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     if @group.update_attributes(params[:group])
-      redirect_to group_posts_path(@group)
+      redirect_to group_posts_url(@group)
     else
       render 'edit'
     end

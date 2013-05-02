@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
   def destroy
     Organization.find(params[:id]).destroy
-    redirect_to root_path
+    redirect_to root_url
   end
 
   def new
@@ -12,7 +12,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(params[:organization])
 
     if @organization.save && @organization.organization_memberships.create(user_id: current_user.id)
-      redirect_to new_organization_group_path(@organization)
+      redirect_to new_organization_group_url(@organization)
     else
       @organization.destroy if @organization.id
 
@@ -28,7 +28,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
 
     if @organization.update_attributes(params[:organization])
-      redirect_to root_path
+      redirect_to root_url
     else
       render 'edit'
     end
