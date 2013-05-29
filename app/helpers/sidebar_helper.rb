@@ -40,7 +40,7 @@ module SidebarHelper
 
   def sidebar_organization(organization)
     render(
-      partial: 'shared/sidebar/organization',
+      partial: 'sidebar/organization',
       locals: { organization: organization }
     )
   end
@@ -55,7 +55,7 @@ module SidebarHelper
   def link_to_edit_organization(organization, active)
     if active
       content_for :javascript do
-        render(partial: 'shared/sidebar/edit_organization', locals: { organization: organization })
+        render(partial: 'sidebar/edit_organization', locals: { organization: organization })
       end
     end
 
