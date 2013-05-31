@@ -1,4 +1,1 @@
-class ReadingListsController < ApplicationController
-  def show
-  end
-end
+class ReadingListsController < ApplicationController; end

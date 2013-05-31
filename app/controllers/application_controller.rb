@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= super && User.includes([:groups, {:organizations => :groups}]).find(super.id)
   end
+
+  def sidebar
+    @sidebar ||= Sidebar.new(current_user)
+  end
+  helper_method :sidebar
 end

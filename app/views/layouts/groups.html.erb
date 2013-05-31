@@ -1,9 +1,0 @@
-<% current_user.organizations.each do |organization| %>
-  <% content_for_sidebar_organizations(organization) do %>
-    <% content_for :sidebar_new_group do %>
-      <% link_to_new_group(organization, organization == @organization && !organization.groups.include?(@group)) %>
-    <% end %>
-  <% end %>
-<% end %>
-
-<%= render template: 'layouts/application' %>

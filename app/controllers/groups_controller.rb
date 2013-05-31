@@ -21,6 +21,8 @@ class GroupsController < ApplicationController
   def edit
     @group = Group.find(params[:id])
     @organization = @group.organization
+
+    sidebar.editing_group = @group
   end
 
   def update
@@ -36,5 +38,7 @@ class GroupsController < ApplicationController
   def new
     @organization = Organization.find(params[:organization_id])
     @group = @organization.groups.build
+
+    sidebar.creating_group = @group
   end
 end

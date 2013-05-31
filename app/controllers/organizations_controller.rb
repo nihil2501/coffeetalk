@@ -6,6 +6,8 @@ class OrganizationsController < ApplicationController
 
   def new
     @organization = Organization.new
+
+    sidebar.creating_organization = @organization
   end
 
   def create
@@ -22,6 +24,8 @@ class OrganizationsController < ApplicationController
 
   def edit
     @organization = Organization.find(params[:id])
+
+    sidebar.editing_organization = @organization
   end
 
   def update

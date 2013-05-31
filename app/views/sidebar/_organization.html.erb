@@ -4,7 +4,7 @@
       <%= li_icon_nav_header "Manage Organization", "icon-wrench" %>
 
       <%= link_to_leave_organization(organization) %>
-      <%= sidebar_edit_organization(organization) %>
+      <%= link_to_edit_organization(organization) %>
       <%= link_to_delete_organization(organization) %>
 
       <li class="divider"></li>
@@ -16,7 +16,7 @@
       <%= li_icon_nav_header "Reading Groups", "icon-book" %>
 
       <%= group_links(organization.groups) %>
-      <%= sidebar_new_group(organization) %>
+      <%= link_to_new_group(organization) %>
 
       <li class="divider"></li>
 

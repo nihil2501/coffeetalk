@@ -1,12 +1,14 @@
 module SidebarHelper
-  def sidebar_new_organization
-    provided = yield_content!(:sidebar_new_organization)
-    default  = link_to_new_organization(false)
+  def link_to_reading_list
+    active = sidebar.reading_list?
+    icon   = active ? "icon-list icon-white" : "icon-list"
 
-    provided.blank? ? default : provided
+    accordion_group_link_to("Reading List", reading_list_path, active, icon)
   end
 
-  def link_to_new_organization(active)
+  def link_to_new_organization
+    active = sidebar.creating_organization?
+
     accordion_group_link_to(
       "Create a new organization",
       new_organization_path,
@@ -15,44 +17,9 @@ module SidebarHelper
     )
   end
 
-  def link_to_reading_list
-    active = @organization.nil?
-    icon   = active ? "icon-list icon-white" : "icon-list"
+  def link_to_edit_organization(organization)
+    active = sidebar.editing_organization?(organization)
 
-    accordion_group_link_to("Reading List", reading_list_path, active, icon)
-  end
-
-  def content_for_sidebar_organizations(organization)
-    content_for :sidebar_organizations do
-      yield
-      sidebar_organization(organization)
-    end
-  end
-
-  def sidebar_organizations
-    provided = yield_content!(:sidebar_organizations)
-    default  = current_user.organizations.map { |organization|
-      sidebar_organization(organization)
-    }.join.html_safe
-
-    provided.blank? ? default : provided
-  end
-
-  def sidebar_organization(organization)
-    render(
-      partial: 'sidebar/organization',
-      locals: { organization: organization }
-    )
-  end
-
-  def sidebar_edit_organization(organization)
-    provided = yield_content!(:sidebar_edit_organization)
-    default  = link_to_edit_organization(organization, false)
-
-    provided.blank? ? default : provided
-  end
-
-  def link_to_edit_organization(organization, active)
     if active
       content_for :javascript do
         render(partial: 'sidebar/edit_organization', locals: { organization: organization })
@@ -62,14 +29,9 @@ module SidebarHelper
     li_icon_link_to("Edit", edit_organization_path(organization), active, nil)
   end
 
-  def sidebar_new_group(organization)
-    provided = yield_content!(:sidebar_new_group)
-    default  = link_to_new_group(organization, false)
+  def link_to_new_group(organization)
+    active = sidebar.creating_group?(organization)
 
-    provided.blank? ? default : provided
-  end
-
-  def link_to_new_group(organization, active)
     li_icon_link_to(
       "Create a new group",
       new_organization_group_path(organization),
@@ -83,7 +45,7 @@ module SidebarHelper
       organization.name,
       "#{organization.id}-collapse",
       "organization-accordion",
-      organization == @organization
+      sidebar.current_organization?(organization)
     ) { yield }
   end
 
@@ -95,7 +57,7 @@ module SidebarHelper
     li_icon_link_to(
       group.name,
       group_posts_path(group_id: group.id),
-      group == @group,
+      sidebar.current_group?(group),
       current_user.groups.include?(group) && "icon-check"
     )
   end
